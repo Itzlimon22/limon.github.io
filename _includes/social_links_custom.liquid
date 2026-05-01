@@ -1,0 +1,45 @@
+{% comment %}
+  Custom social links include — renders icon links from _data/socials.yml.
+  Replaces the jekyll-socials plugin tag for sites where that plugin is disabled.
+  In Jekyll, _data/socials.yml is accessed via site.data.socials.
+{% endcomment %}
+{% if site.data.socials.email %}
+  <a href="mailto:{{ site.data.socials.email }}" title="Email" target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-envelope"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.orcid_id %}
+  <a href="https://orcid.org/{{ site.data.socials.orcid_id }}" title="ORCID" target="_blank" rel="noopener noreferrer">
+    <i class="ai ai-orcid"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.scholar_userid %}
+  <a
+    href="https://scholar.google.com/citations?user={{ site.data.socials.scholar_userid }}"
+    title="Google Scholar"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i class="ai ai-google-scholar"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.github_id %}
+  <a href="https://github.com/{{ site.data.socials.github_id }}" title="GitHub" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-github"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.linkedin_id %}
+  <a href="https://linkedin.com/in/{{ site.data.socials.linkedin_id }}" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-linkedin"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.twitter_id %}
+  <a href="https://twitter.com/{{ site.data.socials.twitter_id }}" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+{% endif %}
+{% if site.data.socials.telegram_id %}
+  <a href="https://t.me/{{ site.data.socials.telegram_id }}" title="Telegram" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-telegram"></i>
+  </a>
+{% endif %}

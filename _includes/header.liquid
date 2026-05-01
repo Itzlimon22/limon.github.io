@@ -22,7 +22,7 @@
         </a>
       {% elsif site.enable_navbar_social %}
         <!-- Social Icons -->
-        <div class="navbar-brand social"><!-- social links disabled: jekyll-socials plugin not installed --></div>
+        <div class="navbar-brand social">{% include social_links_custom.liquid %}</div>
       {% endif %}
       <!-- Navbar Toggle -->
       <button

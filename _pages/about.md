@@ -2,16 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: >
-  CS&E Student · <a href="https://github.com/Itzlimon22" target="_blank">GitHub</a> · Bangladesh
+subtitle: CS&E Student · Bangladesh
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: true
-  more_info: >
-    <p>📧 limon.eece22@gmail.com</p>
-    <p>📍 Bangladesh</p>
+  image_circular: false
+  more_info:
 
 selected_papers: false
 social: true
