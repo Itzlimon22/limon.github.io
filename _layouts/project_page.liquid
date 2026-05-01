@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {{ page.title }}
+      |
+      {{ site.first_name }}
+      {{ site.last_name }}
+    </title>
+    <meta name="description" content="{{ page.abstract | default: page.description | strip_html | truncate: 160 }}">
+
+    <!-- Bulma CSS — same framework as nerfies.github.io -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts: same as Nerfies -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap"
+      rel="stylesheet"
+    >
+
+    <style>
+      /* -------------------------------------------------------
+       * Nerfies-exact styling
+       * ------------------------------------------------------- */
+
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        color: #363636;
+      }
+
+      /* ── Navbar ─────────────────────────────────────────────── */
+      .navbar {
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.9rem;
+      }
+
+      .navbar-item {
+        font-weight: 500;
+      }
+
+      /* ── Hero ───────────────────────────────────────────────── */
+      .publication-title {
+        font-family: 'Google Sans', sans-serif;
+        font-size: 2.6rem !important;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .publication-authors {
+        margin-top: 1.2rem;
+        font-size: 1.1rem;
+      }
+
+      .author-block {
+        display: inline-block;
+        margin-right: 0.2rem;
+      }
+
+      .publication-authors a {
+        color: #3273dc;
+        text-decoration: none;
+      }
+
+      .publication-authors a:hover {
+        text-decoration: underline;
+      }
+
+      .publication-venue {
+        margin-top: 0.8rem;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: #555;
+      }
+
+      /* ── Link buttons ───────────────────────────────────────── */
+      .publication-links {
+        margin-top: 1.5rem;
+      }
+
+      .publication-links .button {
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.5em 1em;
+        border: 1.5px solid #363636;
+        background: transparent;
+        color: #363636;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+
+      .publication-links .button:hover {
+        background: #363636;
+        color: #fff;
+      }
+
+      .publication-links .external-link .icon {
+        margin-right: 0.3em;
+      }
+
+      /* ── Teaser ─────────────────────────────────────────────── */
+      .teaser {
+        background: #fafafa;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .teaser img,
+      .teaser video,
+      .teaser iframe {
+        border-radius: 6px;
+        max-width: 100%;
+      }
+
+      .teaser .teaser-caption {
+        margin-top: 0.8rem;
+        font-size: 0.92rem;
+        color: #666;
+        text-align: center;
+      }
+
+      /* ── Sections ───────────────────────────────────────────── */
+      section.section {
+        padding: 3rem 1.5rem;
+      }
+
+      section.section:nth-child(even) {
+        background: #fafafa;
+      }
+
+      .section-title {
+        font-family: 'Google Sans', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        border-bottom: 2px solid #e8e8e8;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* ── Abstract ───────────────────────────────────────────── */
+      .abstract-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      /* ── Image gallery ──────────────────────────────────────── */
+      .result-image {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 0.5rem;
+      }
+
+      .image-caption {
+        font-size: 0.85rem;
+        color: #666;
+        text-align: center;
+      }
+
+      /* ── BibTeX ─────────────────────────────────────────────── */
+      .bibtex-container {
+        position: relative;
+      }
+
+      .bibtex-code {
+        background: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 1.2rem 1.5rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.82rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        white-space: pre;
+        color: #363636;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.8rem;
+        font-size: 0.78rem;
+        padding: 0.25em 0.6em;
+        border-radius: 4px;
+        cursor: pointer;
+        background: #e8e8e8;
+        border: none;
+        color: #444;
+        transition: background 0.15s;
+      }
+
+      .copy-btn:hover {
+        background: #d0d0d0;
+      }
+
+      /* ── Footer ─────────────────────────────────────────────── */
+      footer.footer {
+        background: #fafafa;
+        border-top: 1px solid #f0f0f0;
+        padding: 2.5rem 1.5rem;
+        font-size: 0.87rem;
+        color: #666;
+        text-align: center;
+      }
+
+      footer.footer a {
+        color: #3273dc;
+        text-decoration: none;
+      }
+
+      footer.footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ── Navbar ─────────────────────────────────────────────── -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{{ site.baseurl }}/">
+            <strong>
+              {{- site.first_name }}
+              {{ site.last_name -}}
+            </strong>
+          </a>
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            {% if page.related_projects %}
+              {% for rp in page.related_projects %}
+                <a class="navbar-item" href="{{ rp.url }}" target="_blank" rel="noopener">
+                  {{ rp.title }}
+                </a>
+              {% endfor %}
+            {% endif %}
+            <a class="navbar-item" href="{{ site.baseurl }}/">← Back to Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── Hero ───────────────────────────────────────────────── -->
+    <section class="hero is-white">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <!-- Title -->
+              <h1 class="title is-1 publication-title">{{ page.title }}</h1>
+
+              <!-- Authors -->
+              {% if page.authors %}
+                <div class="publication-authors">
+                  {% for author in page.authors %}
+                    <span class="author-block">
+                      {% if author.url %}
+                        <a href="{{ author.url }}" target="_blank" rel="noopener">{{ author.name }}</a>
+                      {% else %}
+                        {{ author.name }}
+                      {% endif %}
+                      {% unless forloop.last %},{% endunless %}
+                    </span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <!-- Venue -->
+              {% if page.venue %}
+                <div class="publication-venue">{{ page.venue }}</div>
+              {% endif %}
+
+              <!-- Link buttons -->
+              <div class="publication-links">
+                <div class="buttons is-centered">
+                  {% if page.links.paper %}
+                    <a href="{{ page.links.paper }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span>Paper</span>
+                    </a>
+                  {% endif %}
+                  {% if page.links.arxiv %}
+                    <a href="{{ page.links.arxiv }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="ai ai-arxiv"></i></span>
+                      <span>arXiv</span>
+                    </a>
+                  {% endif %}
+                  {% if page.links.video %}
+                    <a href="{{ page.links.video }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fab fa-youtube"></i></span>
+                      <span>Video</span>
+                    </a>
+                  {% endif %}
+                  {% if page.links.code %}
+                    <a href="{{ page.links.code }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Code</span>
+                    </a>
+                  {% endif %}
+                  {% if page.links.data %}
+                    <a href="{{ page.links.data }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fas fa-database"></i></span>
+                      <span>Data</span>
+                    </a>
+                  {% endif %}
+                  {% if page.links.demo %}
+                    <a href="{{ page.links.demo }}" class="button external-link" target="_blank" rel="noopener">
+                      <span class="icon"><i class="fas fa-rocket"></i></span>
+                      <span>Demo</span>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Teaser image / video ───────────────────────────────── -->
+    {% if page.teaser_image or page.teaser_video %}
+      <section class="teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body has-text-centered">
+            {% if page.teaser_video %}
+              <div class="publication-video">
+                <iframe
+                  src="{{ page.teaser_video }}"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  style="width: 100%; aspect-ratio: 16/9; border-radius: 6px"
+                ></iframe>
+              </div>
+            {% elsif page.teaser_image %}
+              <img src="{{ page.teaser_image | relative_url }}" alt="Teaser image for {{ page.title }}">
+            {% endif %}
+            {% if page.teaser_caption %}
+              <p class="teaser-caption">{{ page.teaser_caption }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- ── Page content (Abstract, Results, etc.) ─────────────── -->
+    <main>
+      {{ content }}
+    </main>
+
+    <!-- ── BibTeX ─────────────────────────────────────────────── -->
+    {% if page.bibtex %}
+      <section class="section" id="bibtex">
+        <div class="container is-max-desktop">
+          <h2 class="section-title">BibTeX</h2>
+          <div class="bibtex-container">
+            <button class="copy-btn" onclick="copyBibtex()" id="copyBtn">Copy</button>
+            <pre class="bibtex-code" id="bibtexBlock">{{ page.bibtex }}</pre>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- ── Footer ─────────────────────────────────────────────── -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          This page is built with the
+          <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> template. Licensed under
+          <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+        </p>
+        <p style="margin-top: 0.4rem">
+          <a href="{{ site.baseurl }}/"
+            >← {{ site.first_name }}
+            {{ site.last_name }}'s Portfolio</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- Copy BibTeX script -->
+    <script>
+      function copyBibtex() {
+        const text = document.getElementById('bibtexBlock').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.getElementById('copyBtn');
+          btn.textContent = 'Copied!';
+          setTimeout(() => (btn.textContent = 'Copy'), 2000);
+        });
+      }
+    </script>
+  </body>
+</html>
