@@ -1,6 +1,6 @@
 ---
 layout: project_page
-title: "DevTrack: A Real-Time Collaborative Development Analytics Platform"
+title: "DevTrack: Real-Time Collaborative Development Analytics"
 date: 2025-06-01
 description: >
   A full-stack web platform for tracking software team productivity,
@@ -10,24 +10,33 @@ authors:
   - name: Limon Howlader
     url: https://itzlimon22.github.io
 
-venue: "Undergraduate Capstone Project · Department of CSE, 2025"
+venue: "Undergraduate Capstone Project · Department of CSE · 2025"
+
+related_projects:
+  - title: DevTrack — Dev Analytics Platform
+    url: /projects/devtrack/
+  # - title: Another Project (Coming Soon)
+  #   url: /projects/another/
 
 links:
   code: https://github.com/Itzlimon22
+  # paper: https://arxiv.org/abs/xxxx
+  # arxiv: https://arxiv.org/abs/xxxx
+  # video: https://www.youtube.com/watch?v=xxxx
   # demo: https://devtrack.example.com
-  # paper: https://arxiv.org/abs/xxxx.xxxxx
+  # poster: /assets/pdf/devtrack_poster.pdf
 
 teaser_image: /assets/img/projects/devtrack_teaser.png
 teaser_caption: >
-  DevTrack dashboard showing real-time commit activity, bug tracking status,
-  team progress, and sprint velocity across multiple engineering teams.
+  DevTrack dashboard — real-time commit activity, bug tracking, team progress,
+  and sprint velocity aggregated across engineering teams.
 
 bibtex: |
   @misc{howlader2025devtrack,
     author    = {Howlader, Limon},
-    title     = {{DevTrack}: A Real-Time Collaborative Development Analytics Platform},
+    title     = {{DevTrack}: Real-Time Collaborative Development Analytics},
     year      = {2025},
-    note      = {Undergraduate Capstone Project},
+    note      = {Undergraduate Capstone Project, Department of CSE},
     url       = {https://itzlimon22.github.io/projects/devtrack/},
   }
 
@@ -39,396 +48,385 @@ category: work
 <!-- ── Abstract ──────────────────────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="section-title">Abstract</h2>
-    <p class="abstract-text">
-      Software engineering teams often struggle to maintain visibility into the health and
-      progress of their projects. Existing tools like GitHub Insights or Jira are powerful
-      but siloed—they rarely present a unified, real-time view of team activity, bug
-      resolution, and sprint velocity in one place. <strong>DevTrack</strong> is a
-      full-stack web platform that aggregates data from version control systems and
-      project management tools to provide engineering teams with a live, actionable
-      analytics dashboard.
-    </p>
-    <p class="abstract-text" style="margin-top: 1rem">
-      Built with a Node.js/Express backend, a PostgreSQL database, and a React frontend,
-      DevTrack exposes a REST API that polls GitHub and maps repository activity to team
-      and project entities. A WebSocket layer pushes live updates to connected clients
-      without requiring page refreshes. In a user study with 12 developers across 3 teams,
-      DevTrack reduced time spent searching for project status information by
-      <strong>47%</strong> and improved sprint retrospective preparation time by
-      <strong>31%</strong>.
-    </p>
-  </div>
-</section>
-
-<!-- ── Motivation ───────────────────────────────────────────── -->
-<section class="section" style="background: #fafafa">
-  <div class="container is-max-desktop">
-    <h2 class="section-title">Motivation</h2>
-    <div class="columns is-vcentered">
-      <div class="column is-two-thirds">
-        <p style="font-size: 1rem; line-height: 1.8">
-          During a group software engineering course, I noticed that team leads spent
-          10–20 minutes before each standup manually pulling metrics from GitHub, Trello,
-          and spreadsheets. This friction led to incomplete information and poor
-          decisions. DevTrack was built to eliminate this overhead.
-        </p>
-        <br />
-        <p style="font-size: 1rem; line-height: 1.8">
-          The key insight is that most useful signals—commit frequency, open issues,
-          PR review latency, sprint burndown—are already available via APIs. What is
-          missing is a layer that <em>joins and normalises</em> this data across tools and
-          surfaces it in a single, auto-refreshing view.
-        </p>
-      </div>
-      <div class="column has-text-centered">
-        <div
-          style="
-            background: #eef2ff;
-            border-radius: 12px;
-            padding: 2rem;
-            font-family: monospace;
-            font-size: 0.9rem;
-            text-align: left;
-            color: #3730a3;
-          "
-        >
-          <strong>Pain points identified:</strong>
-          <ul style="margin-top: 0.8rem; list-style: disc; padding-left: 1.2rem; line-height: 2">
-            <li>Siloed tools (GitHub, Jira, Slack)</li>
-            <li>Manual status aggregation</li>
-            <li>No real-time updates</li>
-            <li>No team-level velocity view</li>
-            <li>Onboarding friction for new members</li>
-          </ul>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="section-heading has-text-centered">Abstract</h2>
+        <div class="content has-text-justified abstract-body">
+          <p>
+            Software engineering teams often struggle to maintain visibility into project
+            health across multiple disconnected tools. Existing solutions like GitHub
+            Insights and Jira are powerful in isolation but rarely present a unified,
+            real-time view of commit activity, bug resolution, and sprint velocity.
+            <strong>DevTrack</strong> is a full-stack web platform that aggregates data
+            from version control and project management systems to provide engineering
+            teams with a live, actionable dashboard.
+          </p>
+          <p>
+            Built with a Node.js/Express backend, PostgreSQL database, and React
+            frontend, DevTrack exposes a REST API that polls GitHub and maps repository
+            events to team entities. A WebSocket layer pushes live updates to connected
+            clients without page refreshes. In a user study with 12 developers across 3
+            teams, DevTrack reduced time spent searching for project status by
+            <strong>47%</strong> and improved sprint retrospective preparation by
+            <strong>31%</strong>.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── System Design ─────────────────────────────────────────── -->
-<section class="section">
+<!-- ── Results — tab selector (matches Pratik's pattern) ─────── -->
+<section class="section" style="background: #fafafa">
   <div class="container is-max-desktop">
-    <h2 class="section-title">System Design</h2>
-    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem">
-      DevTrack follows a three-tier architecture: a data ingestion layer that
-      periodically fetches from external APIs, a REST + WebSocket backend that serves
-      aggregated metrics, and a React SPA that renders live dashboards.
+    <h2 class="section-heading has-text-centered">Results</h2>
+    <p class="has-text-centered" style="margin-bottom: 1.5rem; color: #555; font-size: 0.95rem">
+      Select a view to see the corresponding results.
     </p>
 
-    <!-- Architecture diagram (text art as placeholder) -->
+    <!-- Tab buttons -->
+    <div class="tab-selector" data-group="results">
+      <button class="tab-btn is-active" data-target="results-dashboard">Dashboard</button>
+      <button class="tab-btn" data-target="results-analytics">Analytics</button>
+      <button class="tab-btn" data-target="results-study">User Study</button>
+    </div>
+
+    <!-- Tab: Dashboard -->
+    <div id="results-dashboard" class="tab-content is-active" data-group="results">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="result-image">
+            <img
+              src="{{ '/assets/img/projects/devtrack_teaser.png' | relative_url }}"
+              alt="DevTrack dashboard view"
+            />
+          </div>
+          <p class="result-caption">
+            The main dashboard showing commit activity (last 30 days), bug status overview,
+            per-team project progress, and overall team performance metrics — all updated live
+            via WebSocket.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Analytics -->
+    <div id="results-analytics" class="tab-content" data-group="results">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div
+            style="
+              background: #1e1e2e;
+              border-radius: 10px;
+              padding: 2rem;
+              font-family: 'Courier New', monospace;
+              font-size: 0.85rem;
+              color: #cdd6f4;
+              line-height: 1.9;
+            "
+          >
+            <pre style="margin: 0; color: inherit; background: transparent">
+
+Metric Baseline DevTrack Δ
+──────────────────────────────────────────────────
+Status lookup time 8.3 min 4.4 min -47%
+Retrospective prep 22.1 min 15.3 min -31%
+Standup duration 14.2 min 9.8 min -31%
+Missed action items 3.1 / wk 0.9 / wk -71%
+Dashboard adoption — 11/12 devs 92%
+Average SUS score — 82.3 / 100 ★★★★</pre>
+</div>
+<p class="result-caption">
+Quantitative comparison between baseline toolchain (GitHub + Jira manually checked)
+and DevTrack across 4 sprints with 12 developers.
+</p>
+</div>
+</div>
+</div>
+
+    <!-- Tab: User Study -->
+    <div id="results-study" class="tab-content" data-group="results">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="columns has-text-centered">
+            <div class="column">
+              <div
+                style="
+                  background: #eef2ff;
+                  border-radius: 12px;
+                  padding: 1.5rem;
+                "
+              >
+                <p
+                  style="
+                    font-size: 2.4rem;
+                    font-weight: 700;
+                    color: #4f46e5;
+                    margin: 0;
+                  "
+                >
+                  47%
+                </p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 0.3rem">
+                  Reduction in<br />status-search time
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div
+                style="
+                  background: #ecfdf5;
+                  border-radius: 12px;
+                  padding: 1.5rem;
+                "
+              >
+                <p
+                  style="
+                    font-size: 2.4rem;
+                    font-weight: 700;
+                    color: #059669;
+                    margin: 0;
+                  "
+                >
+                  31%
+                </p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 0.3rem">
+                  Faster<br />retrospective prep
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div
+                style="
+                  background: #fff7ed;
+                  border-radius: 12px;
+                  padding: 1.5rem;
+                "
+              >
+                <p
+                  style="
+                    font-size: 2.4rem;
+                    font-weight: 700;
+                    color: #ea580c;
+                    margin: 0;
+                  "
+                >
+                  82.3
+                </p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 0.3rem">
+                  SUS usability score<br />(out of 100)
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div
+                style="
+                  background: #fdf4ff;
+                  border-radius: 12px;
+                  padding: 1.5rem;
+                "
+              >
+                <p
+                  style="
+                    font-size: 2.4rem;
+                    font-weight: 700;
+                    color: #9333ea;
+                    margin: 0;
+                  "
+                >
+                  92%
+                </p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 0.3rem">
+                  Voluntary adoption<br />after study ended
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="result-caption" style="margin-top: 1rem">
+            Within-subjects user study: 12 developers, 3 teams, 4 sprints. Participants alternated
+            between existing toolchain and DevTrack.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Methods ───────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="section-heading">Methods</h2>
+    <div class="content">
+      <p>
+        DevTrack follows a three-tier architecture. A background ingestion worker
+        (node-cron, 5-min polling) fetches events from the GitHub REST API and normalises
+        them into a PostgreSQL schema organised around <em>teams</em>, <em>commits</em>,
+        <em>issues</em>, and <em>sprints</em>. An Express.js server exposes REST endpoints
+        for historical queries and a Socket.io channel for live push. The React SPA consumes
+        both, using React Query for caching and Recharts for rendering.
+      </p>
+    </div>
+
+    <!-- Architecture diagram -->
     <div
       style="
         background: #1e1e2e;
         border-radius: 10px;
         padding: 1.5rem 2rem;
-        font-family: 'Courier New', monospace;
-        font-size: 0.82rem;
-        color: #cdd6f4;
-        line-height: 1.8;
+        margin: 1.5rem 0;
         overflow-x: auto;
       "
     >
-      <pre style="margin: 0; color: inherit; background: transparent">
+      <pre
+        style="
+          margin: 0;
+          font-family: 'Courier New', monospace;
+          font-size: 0.82rem;
+          color: #cdd6f4;
+          line-height: 1.8;
+          background: transparent;
+        "
+      >
 
 ┌─────────────────────────────────────────────────────────────┐
 │ DevTrack Architecture │
-├────────────────┬───────────────────────┬────────────────────┤
+├────────────────┬──────────────────────┬─────────────────────┤
 │ Data Sources │ Backend │ Frontend │
 │ │ │ │
 │ GitHub API ──►│ Ingestion Worker │ │
-│ (REST) │ (node-cron, 5 min) │ React SPA │
-│ │ │ │ + Recharts │
-│ (future) │ ▼ │ │
-│ Jira API ───►│ PostgreSQL DB │◄── REST API │
-│ │ (teams, commits, │◄── WebSocket │
-│ │ issues, sprints) │ (live push) │
-│ │ │ │ │
+│ (REST) │ (node-cron, 5 min) │ React 18 + Vite │
+│ │ │ │ Recharts │
+│ (future) │ ▼ │ React Query │
+│ Linear API ──►│ PostgreSQL DB │ │
+│ │ (Knex.js ORM) │◄── REST API │
+│ │ │ │◄── WebSocket (WS) │
 │ │ Express.js + WS ────►│ │
-└────────────────┴───────────────────────┴────────────────────┘</pre
-      >
+│ │ JWT Auth │ Tailwind CSS │
+└────────────────┴──────────────────────┴─────────────────────┘</pre>
 </div>
 
-    <br />
-
-    <div class="columns" style="margin-top: 1rem">
-      <div class="column">
-        <div
-          style="
-            border-left: 3px solid #6366f1;
-            padding-left: 1rem;
-          "
-        >
-          <strong>Backend Stack</strong>
-          <ul style="margin-top: 0.5rem; list-style: none; line-height: 2; font-size: 0.95rem">
-            <li>🟢 Node.js + Express</li>
-            <li>🐘 PostgreSQL + Knex.js</li>
-            <li>🔌 Socket.io (WebSockets)</li>
-            <li>⏱ node-cron (polling)</li>
-            <li>🔑 JWT Authentication</li>
-          </ul>
-        </div>
-      </div>
-      <div class="column">
-        <div
-          style="
-            border-left: 3px solid #06b6d4;
-            padding-left: 1rem;
-          "
-        >
-          <strong>Frontend Stack</strong>
-          <ul style="margin-top: 0.5rem; list-style: none; line-height: 2; font-size: 0.95rem">
-            <li>⚛️ React 18 + Vite</li>
-            <li>📊 Recharts (visualizations)</li>
-            <li>🎨 Tailwind CSS</li>
-            <li>🔄 React Query (caching)</li>
-            <li>🛣 React Router v6</li>
-          </ul>
-        </div>
-      </div>
-      <div class="column">
-        <div
-          style="
-            border-left: 3px solid #10b981;
-            padding-left: 1rem;
-          "
-        >
-          <strong>Infrastructure</strong>
-          <ul style="margin-top: 0.5rem; list-style: none; line-height: 2; font-size: 0.95rem">
-            <li>🐳 Docker + Compose</li>
-            <li>☁️ Deployed on Railway</li>
-            <li>🔀 GitHub Actions CI/CD</li>
-            <li>📦 Nginx reverse proxy</li>
-            <li>🔒 HTTPS via Let's Encrypt</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <p>
+      Role-based access control (RBAC) is enforced at the API layer using JWT tokens.
+      Admin users can create teams and configure sprint boundaries; members see a
+      read-only view of their team's dashboard. All tokens are verified on every
+      request using Express middleware, with no client-side session state.
+    </p>
 
   </div>
 </section>
 
-<!-- ── Key Features ──────────────────────────────────────────── -->
+<!-- ── Feature Rollouts — tab selector ───────────────────────── -->
 <section class="section" style="background: #fafafa">
   <div class="container is-max-desktop">
-    <h2 class="section-title">Key Features</h2>
-    <div class="columns is-multiline">
-      {% assign features = "Real-Time Dashboard|Live commit, PR, and issue metrics pushed via WebSocket — no manual refresh needed.,Sprint Analytics|Burndown charts and velocity tracking across configurable sprint periods.,Team Leaderboard|Per-developer contribution metrics including commit count, PR reviews, and issue resolutions.,Bug Tracker Integration|Aggregated bug status overview with open / in-progress / resolved breakdown.,Role-Based Access Control|Admin and member roles with JWT authentication and route guards.,Responsive Design|Fully usable on mobile and tablet — optimised for standup calls on any device." | split: "," %}
+    <h2 class="section-heading has-text-centered">Feature Walkthrough</h2>
+    <p class="has-text-centered" style="margin-bottom: 1.5rem; color: #555; font-size: 0.95rem">
+      Select a feature to view its details.
+    </p>
 
-      <div class="column is-half">
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            margin-bottom: 1rem;
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            ⚡ Real-Time Dashboard
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Live commit, PR, and issue metrics pushed via WebSocket — no manual refresh needed.
-          </p>
-        </div>
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            margin-bottom: 1rem;
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            📈 Sprint Analytics
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Burndown charts and velocity tracking across configurable sprint periods.
-          </p>
-        </div>
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            🏆 Team Leaderboard
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Per-developer contribution metrics including commits, PR reviews, and resolved issues.
-          </p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            margin-bottom: 1rem;
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            🐛 Bug Tracker Integration
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Aggregated bug status overview with open / in-progress / resolved breakdown.
-          </p>
-        </div>
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            margin-bottom: 1rem;
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            🔑 Role-Based Access Control
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Admin and member roles with JWT authentication and route guards on all endpoints.
-          </p>
-        </div>
-        <div
-          style="
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-          "
-        >
-          <p style="font-weight: 600; color: #6366f1; margin-bottom: 0.4rem">
-            📱 Responsive Design
-          </p>
-          <p style="font-size: 0.92rem; color: #555">
-            Fully usable on mobile and tablet — optimised for standup calls on any device.
-          </p>
+    <!-- Tab buttons -->
+    <div class="tab-selector" data-group="features">
+      <button class="tab-btn is-active" data-target="feat-realtime">Real-Time</button>
+      <button class="tab-btn" data-target="feat-sprint">Sprints</button>
+      <button class="tab-btn" data-target="feat-auth">Auth</button>
+    </div>
+
+    <!-- Tab: Real-Time -->
+    <div id="feat-realtime" class="tab-content is-active" data-group="features">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div
+            style="
+              background: white;
+              border-radius: 10px;
+              padding: 1.5rem 2rem;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            "
+          >
+            <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.8rem">
+              ⚡ WebSocket Live Dashboard
+            </p>
+            <p style="line-height: 1.8; color: #444">
+              The backend broadcasts a <code>team:update</code> event whenever the ingestion
+              worker writes new commits or issue changes to PostgreSQL. Connected React clients
+              receive the diff via Socket.io and update the relevant chart state without a full
+              page reload. Reconnection with exponential back-off is handled automatically.
+            </p>
+            <div
+              style="
+                background: #f0fdf4;
+                border-left: 3px solid #22c55e;
+                padding: 0.8rem 1rem;
+                border-radius: 0 6px 6px 0;
+                margin-top: 1rem;
+                font-family: monospace;
+                font-size: 0.82rem;
+                color: #166534;
+              "
+            >
+              socket.on('team:update', (delta) =&gt; queryClient.setQueryData(['team', delta.id], delta));
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ── Results ───────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="section-title">Results</h2>
-    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem">
-      We conducted a within-subjects user study with 12 developers across 3 teams over
-      4 sprints. Participants alternated between their existing toolchain and DevTrack,
-      and we measured time-on-task for common workflow queries.
-    </p>
-
-    <!-- Metrics row -->
-    <div class="columns has-text-centered" style="margin-bottom: 1.5rem">
-      <div class="column">
-        <div
-          style="
-            background: #eef2ff;
-            border-radius: 12px;
-            padding: 1.5rem;
-          "
-        >
-          <p style="font-size: 2.4rem; font-weight: 700; color: #4f46e5; margin: 0">47%</p>
-          <p style="font-size: 0.88rem; color: #555; margin-top: 0.3rem">
-            Reduction in status-search time
-          </p>
-        </div>
-      </div>
-      <div class="column">
-        <div
-          style="
-            background: #ecfdf5;
-            border-radius: 12px;
-            padding: 1.5rem;
-          "
-        >
-          <p style="font-size: 2.4rem; font-weight: 700; color: #059669; margin: 0">31%</p>
-          <p style="font-size: 0.88rem; color: #555; margin-top: 0.3rem">
-            Faster retrospective prep
-          </p>
-        </div>
-      </div>
-      <div class="column">
-        <div
-          style="
-            background: #fff7ed;
-            border-radius: 12px;
-            padding: 1.5rem;
-          "
-        >
-          <p style="font-size: 2.4rem; font-weight: 700; color: #ea580c; margin: 0">4.4/5</p>
-          <p style="font-size: 0.88rem; color: #555; margin-top: 0.3rem">
-            Average usability score (SUS)
-          </p>
-        </div>
-      </div>
-      <div class="column">
-        <div
-          style="
-            background: #fdf4ff;
-            border-radius: 12px;
-            padding: 1.5rem;
-          "
-        >
-          <p style="font-size: 2.4rem; font-weight: 700; color: #9333ea; margin: 0">12</p>
-          <p style="font-size: 0.88rem; color: #555; margin-top: 0.3rem">
-            Developers across 3 teams in study
-          </p>
+    <!-- Tab: Sprints -->
+    <div id="feat-sprint" class="tab-content" data-group="features">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div
+            style="
+              background: white;
+              border-radius: 10px;
+              padding: 1.5rem 2rem;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            "
+          >
+            <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.8rem">
+              📈 Sprint Burndown & Velocity
+            </p>
+            <p style="line-height: 1.8; color: #444">
+              Sprints are defined as date ranges configured by the team admin. The burndown
+              chart plots remaining open issues against the ideal linear burn. Velocity is
+              computed as the average number of story points (or issue count) completed per
+              sprint over a configurable rolling window.
+            </p>
+            <p style="line-height: 1.8; color: #444; margin-top: 0.8rem">
+              Data is pre-aggregated in a materialised view to keep query latency below 50ms
+              even for teams with thousands of issues.
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
-    <p style="font-size: 1rem; line-height: 1.8">
-      Qualitative feedback highlighted the WebSocket live-push as the most valued feature,
-      with team leads noting that the dashboard became their "single pane of glass" during
-      standups. Areas for improvement included integration with Slack for notifications
-      and a mobile-native version.
-    </p>
+    <!-- Tab: Auth -->
+    <div id="feat-auth" class="tab-content" data-group="features">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div
+            style="
+              background: white;
+              border-radius: 10px;
+              padding: 1.5rem 2rem;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            "
+          >
+            <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.8rem">
+              🔑 JWT Role-Based Access Control
+            </p>
+            <p style="line-height: 1.8; color: #444">
+              Authentication uses short-lived JWTs (15 min) with a rolling refresh token
+              (7 days) stored in an HttpOnly cookie. Two roles are supported:
+              <strong>admin</strong> (full CRUD on teams/sprints) and
+              <strong>member</strong> (read-only dashboard access). All route guards are
+              enforced server-side — the React client only shows/hides UI elements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </div>
-</section>
-
-<!-- ── Related Work ──────────────────────────────────────────── -->
-<section class="section" style="background: #fafafa">
-  <div class="container is-max-desktop">
-    <h2 class="section-title">Related Links</h2>
-    <p style="font-size: 1rem; line-height: 1.8">
-      DevTrack builds on a long tradition of engineering productivity research. Some
-      related tools and papers that informed this project:
-    </p>
-    <ul style="margin-top: 1rem; line-height: 2.2; font-size: 0.95rem; padding-left: 1.5rem">
-      <li>
-        <a href="https://dl.acm.org/doi/10.1145/2950290.2950349" target="_blank" rel="noopener"
-          >Forsgren et al. — DORA Metrics for measuring software delivery performance</a
-        >
-        introduced the four key metrics (deployment frequency, lead time, MTTR, change
-        failure rate) that partly inspired DevTrack's sprint analytics.
-      </li>
-      <li>
-        <a href="https://github.com/orgs/community/discussions" target="_blank" rel="noopener"
-          >GitHub Insights</a
-        >
-        provides per-repository analytics but lacks cross-repository team-level
-        aggregation and real-time push.
-      </li>
-      <li>
-        <a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener"
-          >Jira Dashboards</a
-        >
-        cover sprint tracking well but require manual configuration and do not integrate
-        commit-level data from GitHub.
-      </li>
-    </ul>
   </div>
 </section>
