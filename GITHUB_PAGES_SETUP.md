@@ -1,18 +1,23 @@
 # GitHub Pages Deployment Setup
 
-## Current Issue
+## ✅ Build Fixed!
 
-GitHub Pages is trying to build your site with the default builder (Jekyll 3.10.0 with github-pages gem), which doesn't support all the custom plugins we're using like `jekyll-toc`, `jekyll-imagemagick`, etc.
+The local production build now completes successfully. All GitHub Actions checks should pass.
 
-## Solution: Use GitHub Actions
+### What Was Fixed
 
-Your repository already has a proper deployment workflow configured in `.github/workflows/deploy.yml` that uses:
+- **jekyll-socials plugin removed** - Had a critical bug causing "undefined method split for nil" errors
+- **Social links temporarily disabled** - Pending plugin fix upstream
+- **Production build verified** - Local build completes without errors
 
-- Ruby 3.3.5
-- Jekyll 4.4.1
-- All required dependencies
+### Current Status
 
-You just need to configure GitHub Pages to use this workflow.
+✅ Local build: **WORKING**  
+⏳ GitHub Actions: **Ready to run** (configure Pages source below)
+
+## Remaining Step: Configure GitHub Pages Source
+
+Your repository's GitHub Actions workflow is already set up correctly in `.github/workflows/deploy.yml`. It just needs to be enabled as the build source.
 
 ### Step 1: Update Repository Settings
 
@@ -28,26 +33,29 @@ After changing the source to GitHub Actions:
 
 1. Go to **Actions** tab
 2. You should see "Deploy site" workflow in the sidebar
-3. It will automatically run on your next push
+3. It will automatically run on your next push (or click "Run workflow")
 
 ### Step 3: Verify Deployment
 
 Once the workflow completes:
 
 1. Go to **Settings** → **Pages**
-2. You should see a message like "Your site is live at https://limon.github.io"
+2. You should see "Your site is live at https://limon.github.io"
 3. Your site will be deployed with all features working
 
 ## Why This Works Better
 
-- ✅ **Full plugin support**: All al-folio plugins work correctly
+- ✅ **Full plugin support**: Ruby 3.3.5 + Jekyll 4.4.1 (vs GitHub Pages default 3.10.0)
+- ✅ **All al-folio features**: jekyll-tabs, jekyll-toc, jekyll-imagemagick, etc. work correctly
 - ✅ **Better performance**: Consistent build environment
 - ✅ **More control**: Can customize build process as needed
-- ✅ **Faster builds**: GitHub Actions is optimized for this
+- ✅ **Faster builds**: GitHub Actions optimized
 
-## What Changed
+## Known Limitations
 
-No code changes needed! The workflow is already configured. You just need to:
+- Social media icons temporarily hidden (jekyll-socials plugin disabled)
+- Will be re-enabled once upstream plugin issue is resolved
+- All other site features fully operational
 
 1. Tell GitHub Pages to use GitHub Actions as the source
 2. That's it!
