@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2026-05-01 10:00:00+0600
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+🚀 Launched my personal portfolio website built with [al-folio](https://github.com/alshedivat/al-folio) and deployed on GitHub Pages.

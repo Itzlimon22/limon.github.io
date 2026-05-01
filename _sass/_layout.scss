@@ -37,12 +37,105 @@ body.sticky-bottom-footer {
 .profile {
   img {
     width: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow:
+      0 8px 32px rgba(67, 97, 238, 0.2),
+      0 0 0 3px rgba(67, 97, 238, 0.15);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 12px 40px rgba(67, 97, 238, 0.3),
+        0 0 0 4px rgba(67, 97, 238, 0.25);
+    }
+  }
+
+  .more-info {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--global-text-color-light);
+    line-height: 1.8;
+
+    p {
+      margin-bottom: 0.3rem;
+    }
+
+    a {
+      color: var(--global-theme-color);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
-// Content layout uses Bootstrap's grid system with responsive columns
-// Main content flows naturally through container-mt-5 and Bootstrap grid classes
-// See _layouts/default.liquid and _includes/projects.liquid for examples
+// About page header
+.post-header {
+  .post-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--global-theme-color) 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .desc {
+    font-size: 1.05rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0;
+
+    a {
+      color: var(--global-theme-color);
+      font-weight: 500;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Section headings on about page
+article h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--global-theme-color);
+  border-bottom: 2px solid var(--global-divider-color);
+  padding-bottom: 0.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+// News section cards
+.news {
+  table {
+    td {
+      border-top: none;
+      padding: 0.6rem 0.5rem;
+
+      &:first-child {
+        min-width: 70px;
+        font-size: 0.8rem;
+        color: var(--global-text-color-light);
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
 
 /******************************************************************************
  * Publications

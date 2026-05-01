@@ -7,9 +7,9 @@ first_name: Limon
 middle_name:
 last_name: Howlader
 contact_note: >
-  Email is the best way to reach me.
+  The best way to reach me is via email.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Portfolio and research website for Limon Howlader. Based on the [al-folio](https://github.com/alshedivat/al-folio) design.
+  Portfolio and research website for Limon Howlader — CS&E student, developer, and open-source enthusiast from Bangladesh.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
@@ -91,7 +91,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: al-folio # blog_name will be displayed in your blog page
+blog_name: Limon's Blog # blog_name will be displayed in your blog page
 blog_description: a simple whitespace theme for academics
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
@@ -461,7 +461,7 @@ third_party_libraries:
     version: "5.5.0"
   google_fonts:
     url:
-      fonts: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&display=swap"
+      fonts: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;600;700&display=swap"
   highlightjs:
     integrity:
       css:
