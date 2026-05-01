@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-🚀 Launched my personal portfolio website built with [al-folio](https://github.com/alshedivat/al-folio) and deployed on GitHub Pages.
+Launched my personal portfolio website built with [al-folio](https://github.com/alshedivat/al-folio) and deployed on GitHub Pages. Check it out!

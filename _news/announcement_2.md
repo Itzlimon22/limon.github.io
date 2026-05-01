@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-💡 Started contributing to open-source projects on [GitHub](https://github.com/Itzlimon22). Check out my repositories!
+Started actively contributing to open-source projects on [GitHub](https://github.com/Itzlimon22). Exploring developer tooling and web frameworks.

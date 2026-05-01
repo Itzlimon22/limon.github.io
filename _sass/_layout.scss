@@ -85,33 +85,43 @@ body.sticky-bottom-footer {
   }
 }
 
-// Section headings on about page
+// Section headings on about page — plain dark like Pratik's site
 article h2 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--global-theme-color);
-  border-bottom: 2px solid var(--global-divider-color);
-  padding-bottom: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--global-text-color);
   margin-top: 2rem;
-  margin-bottom: 1.2rem;
-  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
 }
 
-// News section cards
+// News section — matches Pratik's two-column table format
 .news {
   table {
+    th,
     td {
       border-top: none;
-      padding: 0.6rem 0.5rem;
+      vertical-align: top;
+    }
 
-      &:first-child {
-        min-width: 70px;
-        font-size: 0.8rem;
-        color: var(--global-text-color-light);
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-      }
+    th {
+      width: 130px;
+      min-width: 110px;
+      padding: 0.75rem 1rem 0.75rem 0;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--global-text-color);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.75rem 0;
+      font-size: 0.9rem;
+      color: var(--global-text-color);
+      line-height: 1.6;
+    }
+
+    tr {
+      border-bottom: none;
     }
   }
 }
