@@ -72,7 +72,7 @@ When modifying `_config.yml`, these **must be updated together**:
 | Liquid templates (`_includes/`, `_layouts/`)  | [liquid-templates.instructions.md](.github/instructions/liquid-templates.instructions.md)       |
 | JavaScript (`_scripts/`)                      | [javascript-scripts.instructions.md](.github/instructions/javascript-scripts.instructions.md)   |
 
-## Common Issues
+## Common Issue
 
 For troubleshooting, see:
 
